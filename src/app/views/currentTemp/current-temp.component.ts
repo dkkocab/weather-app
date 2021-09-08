@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
@@ -6,30 +6,43 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
     selector: 'current-temp',
     templateUrl: './current-temp.component.html',
   })
-  export class CurrentTempComponent implements OnInit{
+  export class CurrentTempComponent{
 
     private httpOptions = {
         headers: new HttpHeaders()
     }
     weatherData: any
-    hello = 'hello'
-    self = this
-    temp = 0
+    showTemps = false;
+    badRequest = false;
+
 
     constructor(public http: HttpClient){}
 
     title = 'current-temp'
 
-    currentTemp() {
-        return this.http.get("https://api.openweathermap.org/data/2.5/weather?q=London&appid=36b5b22a6b971b35b6d568597c9fb37f", this.httpOptions).toPromise();
+    currentTemp(city: any) {
+        return this.http.get("https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=36b5b22a6b971b35b6d568597c9fb37f", this.httpOptions).toPromise();
     }
 
     convertTemp(temp :any){
         return Math.round((temp - 273.15) * (9/5) + 32)
     }
 
-    async ngOnInit(){
-        await this.currentTemp().then(data => this.weatherData = data)    
+    async loadTemps(value? : string){
+        try{
+            await this.currentTemp(value).then(data => this.weatherData = data)
+            this.badRequest = false;
+            this.showTemps = true;
+
+        }
+        catch(err){
+            this.badRequest = true
+            this.showTemps = false;
+        }
+    }
+
+    search(value:string) { 
+        this.loadTemps(value)
     }
     
   } 

@@ -7,19 +7,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CurrentTempComponent } from './views/currentTemp/current-temp.component';
 import { NavbarComponent } from './views/navbar/navbar.component';
+import { ForecastComponent } from './views/forecast/forecast.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    CurrentTempComponent
+    CurrentTempComponent,
+    ForecastComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     RouterModule.forRoot([
-      {path: 'current-temp', component: CurrentTempComponent},
+      {path: '', component: CurrentTempComponent},
+      {path: 'forecast', component: ForecastComponent}
     ])
   ],
   providers: [],
