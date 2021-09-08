@@ -1,0 +1,31 @@
+<div class='has-background-light'>
+    <div class='container' >
+        <section class="section ">
+            <h1 class="title">Current Temperature for Detroit</h1>
+            <div class="box">
+                <h2 class="title">{{this.weatherData.name}}</h2>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Current Temperature: </th>
+                            <td>{{convertTemp(this.weatherData.main.temp)}}</td>
+                        </tr>
+                        <tr>
+                            <th>Feels Like: </th>
+                            <td>{{convertTemp(this.weatherData.main.temp)}}</td>
+                        </tr>
+                        <tr>
+                            <th>High: </th>
+                            <td>{{convertTemp(this.weatherData.main.temp)}}</td>
+                        </tr>
+                        <tr>
+                            <th>Low: </th>
+                            <td>{{convertTemp(this.weatherData.main.temp)}}</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </section>
+    </div>
+</div>
