@@ -1,10 +1,90 @@
 <div class='has-background-light'>
-  <div class='container' >
-      <section class="section ">
-          <h1 class="title">Five Day Forecast</h1>
-          <div class="box">
-            
-          </div>
-      </section>
+  <div class='container'>
+    <section class="section ">
+      <h1 class="title">Five Day Forecast</h1>
+      <div class="buttons">
+        <input #inputField class="input" placeholder="Search City..." (keyup.enter)="search(inputField.value)">
+      </div>
+      <div class="box">
+        <h2 class="title">{{this.weatherData.city.name}}</h2>
+        <table class="table is-fullwidth">
+          <thead>
+            <th></th>
+            <th>Day 1</th>
+            <th>Day 2</th>
+            <th>Day 3</th>
+            <th>Day 4</th>
+            <th>Day 5</th>
+          </thead>
+          <tbody>
+            <tr>
+              <th>12 am:</th>
+              <td>{{convertTemp(this.weatherData.list[0].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[1].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[2].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[3].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[4].main.temp)}}</td>
+            </tr>
+            <tr>
+              <th>3 am:</th>
+              <td>{{convertTemp(this.weatherData.list[5].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[6].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[7].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[8].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[9].main.temp)}}</td>
+            </tr>
+            <tr>
+              <th>6 am:</th>
+              <td>{{convertTemp(this.weatherData.list[10].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[11].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[12].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[13].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[14].main.temp)}}</td>
+            </tr>
+            <tr>
+              <th>9 am:</th>
+              <td>{{convertTemp(this.weatherData.list[15].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[16].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[17].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[18].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[19].main.temp)}}</td>
+            </tr>
+            <tr>
+              <th>12 pm:</th>
+              <td>{{convertTemp(this.weatherData.list[20].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[21].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[22].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[23].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[24].main.temp)}}</td>
+            </tr>
+            <tr>
+              <th>3 pm:</th>
+              <td>{{convertTemp(this.weatherData.list[25].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[26].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[27].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[28].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[29].main.temp)}}</td>
+            </tr>
+            <tr>
+              <th>6 pm:</th>
+              <td>{{convertTemp(this.weatherData.list[30].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[31].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[32].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[33].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[34].main.temp)}}</td>
+            </tr>
+            <tr>
+              <th>9 pm:</th>
+              <td>{{convertTemp(this.weatherData.list[35].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[36].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[37].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[38].main.temp)}}</td>
+              <td>{{convertTemp(this.weatherData.list[39].main.temp)}}</td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+    </section>
   </div>
 </div>

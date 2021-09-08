@@ -7,25 +7,22 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
     templateUrl: './current-temp.component.html',
   })
   export class CurrentTempComponent{
+    constructor(public http: HttpClient){}
 
     private httpOptions = {
         headers: new HttpHeaders()
     }
+    private secret = '36b5b22a6b971b35b6d568597c9fb37f' //would normally hide this but for sake of making sure you can run it
     weatherData: any
     showTemps = false;
     badRequest = false;
 
-
-    constructor(public http: HttpClient){}
-
-    title = 'current-temp'
-
-    currentTemp(city: any) {
-        return this.http.get("https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=36b5b22a6b971b35b6d568597c9fb37f", this.httpOptions).toPromise();
-    }
-
     convertTemp(temp :any){
         return Math.round((temp - 273.15) * (9/5) + 32)
+    }
+
+    currentTemp(city: any) {
+        return this.http.get("https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+this.secret, this.httpOptions).toPromise();
     }
 
     async loadTemps(value? : string){
