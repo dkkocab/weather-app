@@ -1,0 +1,37 @@
+<div class='has-background-light'>
+  <div class='container'>
+    <section class="section ">
+      <h1 class="title">Five Day Forecast</h1>
+      <div class="box" *ngIf="showTemps">
+        <h2 class="title">{{this.weatherData.city.name}}</h2>
+        <table class="table is-fullwidth is-striped has-text-centered has-background-link-light">
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Time</th>
+              <th>Temperature</th>
+              <th>Forecast</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor='let day of dateTimeTemperature; let I=index'>
+              <td *ngFor='let item of day'>
+                {{item}}
+              </td>
+              <td>
+                <img src="http://openweathermap.org/img/w/{{icons[I]}}.png">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="box" *ngIf="!showTemps">
+        <p class="has-text-centered">Loading...</p>
+        <progress class="progress is-primary" max="100">30%</progress>
+      </div>
+      <div class="box" *ngIf='badRequest'>
+        <h2>Unable to get weather for your current location. Please refresh and try again</h2>
+      </div>
+    </section>
+  </div>
+</div>

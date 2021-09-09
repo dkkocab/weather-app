@@ -4,9 +4,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { CurrentTempComponent } from './current-temp.component';
 import * as TypeMoq from "typemoq-continued";
 
-describe('AppComponent', () => {
+describe('CurrentTempComponent', () => {
     const httpMock = TypeMoq.Mock.ofType<HttpClient>()
-    const currentTemp = new CurrentTempComponent(httpMock.object)
+    const currentTempComponent = new CurrentTempComponent(httpMock.object)
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -19,10 +19,16 @@ describe('AppComponent', () => {
     }).compileComponents();
   });
 
-  it('should correctly convert temperatues from Kelvin to Fahrenheit', () => {
-    const Kelvin = 300
-    const response = currentTemp.convertTemp(Kelvin)
-    expect(response).toEqual(80)
+  it('should create', () => {
+    expect(currentTempComponent).toBeTruthy();
+  });
+
+  it('should fail on search' ,() => {
+    const badSearch = 123
+    const bad = 321
+    const response = currentTempComponent.loadTemps(badSearch, bad)
+    expect(currentTempComponent.badRequest).toBeTruthy()
+    expect(currentTempComponent.showTemps).toBeFalsy()
   })
 
 });

@@ -5,16 +5,16 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CurrentTempComponent } from './views/currentTemp/current-temp.component';
-import { NavbarComponent } from './views/navbar/navbar.component';
-import { ForecastComponent } from './views/forecast/forecast.component';
+import { CurrentTempComponent } from './components/currentTemp/current-temp.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { ForecastComponent } from './components/forecast/forecast.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     CurrentTempComponent,
-    ForecastComponent
+    ForecastComponent,
   ],
   imports: [
     BrowserModule,
