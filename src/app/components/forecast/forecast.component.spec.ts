@@ -9,6 +9,9 @@ describe('ForecastComponent', () => {
   const forecastComponent = new ForecastComponent(httpMock.object)
 
   forecastComponent.weatherData = {
+    city: {
+      name: 'Detroit'
+    },
     list: [
       {
         dt_txt: "1998-03-27 04:30:23",
@@ -28,10 +31,6 @@ describe('ForecastComponent', () => {
     ]
   }
 
-  forecastComponent.dateTimeTemperature = [['']]
-
-  forecastComponent.icons = ['']
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
@@ -47,13 +46,21 @@ describe('ForecastComponent', () => {
     expect(forecastComponent).toBeTruthy();
   });
 
-  it('should get the dates and times', () => {
-    const response = forecastComponent.getWeatherData()
-    expect(forecastComponent.dateTimeTemperature[0]).toContain('03-27')
-    expect(forecastComponent.dateTimeTemperature[1]).toContain("12-12")
-    expect(forecastComponent.dateTimeTemperature[0]).toContain('04:30')
-    expect(forecastComponent.dateTimeTemperature[1]).toContain('12:00')
-    expect(forecastComponent.icons).toContain('10n')
+  it('should get the Forecast data', () => {
+    const response = forecastComponent.getCleanWeatherData()
+    expect(forecastComponent.forecastData.DateTimeTemperature[0].Date).toEqual('03-27')
+    expect(forecastComponent.forecastData.DateTimeTemperature[0].Time).toEqual('04:30')
+    expect(forecastComponent.forecastData.DateTimeTemperature[1].Date).toEqual('12-12')
+    expect(forecastComponent.forecastData.DateTimeTemperature[1].Time).toEqual('12:00')
+    expect(forecastComponent.forecastData.Icons).toContain('10n')
+    expect(forecastComponent.forecastData.City).toEqual('Detroit')
   })
 
+  it('should fail on getting Forecast data' ,() => {
+    const badLong = 123
+    const badLat = 321
+    const response = forecastComponent.loadTemps(badLat, badLong)
+    expect(forecastComponent.badRequest).toBeTruthy()
+    expect(forecastComponent.showTemps).toBeFalsy()
+  })
 });

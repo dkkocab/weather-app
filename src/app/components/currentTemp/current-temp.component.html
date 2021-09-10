@@ -2,7 +2,7 @@
     <div class='container' >
         <section class="section ">
             <h1 class="title">Current Temperature</h1>
-            <div class="box content" *ngIf="showTemps">
+            <div class="box content has-background-grey-lighter" *ngIf="showTemps">
                 <h2 class="title">{{todayTempData.City}}  <span class="has-text-link-dark">{{todayTempData.Current}}°F </span><img src ="http://openweathermap.org/img/w/{{this.weatherData.weather[0].icon}}.png"></h2>
                 <table class="table has-background-link-light has-text-centered">
                     <tbody>
@@ -24,7 +24,7 @@
             </div>
             <div class="box" *ngIf="!showTemps">
                 <p class="has-text-centered">Loading...</p>
-                <progress class="progress is-primary" max="100">30%</progress>
+                <progress class="progress is-primary" *ngIf='!badRequest' max="100">30%</progress>
             </div>
             <div class="box" *ngIf='badRequest'>
                 <h2>Unable to get weather for your current location. Please refresh and try again</h2>

@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { DateTimeTemp, ForecastModel } from 'src/app/models/forecast.model';
 
 @Component({
     selector: 'forecast',
@@ -17,8 +18,7 @@ export class ForecastComponent implements OnInit {
     showTemps = false;
     badRequest = false;
     url = "https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat="
-    dateTimeTemperature = [['']]
-    icons = [' ']
+    forecastData = new ForecastModel()
 
     ngOnInit() {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -26,34 +26,35 @@ export class ForecastComponent implements OnInit {
         });
     }
 
-    currentTemp(latitude: any, longitude: any) {
+    callAPI(latitude: any, longitude: any) {
         return this.http.get(this.url + latitude + "&lon=" + longitude + "&appid=" + this.secret, this.httpOptions).toPromise();
     }
 
     async loadTemps(latitude: any, longitude: any) {
         try {
-            await this.currentTemp(latitude, longitude).then(data => this.weatherData = data)
-            this.getWeatherData()
+            await this.callAPI(latitude, longitude).then(data => this.weatherData = data)
+            this.getCleanWeatherData()
             this.badRequest = false;
             this.showTemps = true;
         }
         catch (err) {
+            console.log(err)
             this.badRequest = true
             this.showTemps = false;
         }
     }
 
-    getWeatherData(){
-        this.dateTimeTemperature.pop()
-        this.icons.pop()
-        for(let item of this.weatherData.list) {
+    getCleanWeatherData() {
+        this.forecastData.City = this.weatherData.city.name
+        for (let item of this.weatherData.list) {
+            let dateTimeTemp = new DateTimeTemp()
             let array = item.dt_txt.split(' ')
-            let day = array[0].substring(5)
-            let time = array[1].slice(0,5)
-            let icon = item.weather[0].icon
-            let temp = Math.round(item.main.temp).toString() + ' °F'
-            this.dateTimeTemperature.push([day, time, temp])
-            this.icons.push(icon)
+            dateTimeTemp.Date = array[0].substring(5)
+            dateTimeTemp.Time = array[1].slice(0, 5)
+            dateTimeTemp.Temp = Math.round(item.main.temp).toString() + ' °F'
+
+            this.forecastData.DateTimeTemperature.push(dateTimeTemp)
+            this.forecastData.Icons.push(item.weather[0].icon)
         }
     }
 }

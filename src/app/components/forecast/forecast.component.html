@@ -2,24 +2,24 @@
   <div class='container'>
     <section class="section ">
       <h1 class="title">Five Day Forecast</h1>
-      <div class="box" *ngIf="showTemps">
-        <h2 class="title">{{this.weatherData.city.name}}</h2>
+      <div class="box has-background-grey-lighter" *ngIf="showTemps">
+        <h2 class="title">{{forecastData.City}}</h2>
         <table class="table is-fullwidth is-striped has-text-centered has-background-link-light">
           <thead>
             <tr>
-              <th>Day</th>
+              <th>Date</th>
               <th>Time</th>
               <th>Temperature</th>
               <th>Forecast</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor='let day of dateTimeTemperature; let I=index'>
-              <td *ngFor='let item of day'>
-                {{item}}
-              </td>
+            <tr *ngFor='let item of forecastData.DateTimeTemperature; let I=index'>
+              <td><b>{{item.Date}}</b></td>
+              <td>{{item.Time}}</td>
+              <td class="has-text-link">{{item.Temp}}</td>
               <td>
-                <img src="http://openweathermap.org/img/w/{{icons[I]}}.png">
+                <img src="http://openweathermap.org/img/w/{{forecastData.Icons[I]}}.png">
               </td>
             </tr>
           </tbody>
@@ -27,7 +27,7 @@
       </div>
       <div class="box" *ngIf="!showTemps">
         <p class="has-text-centered">Loading...</p>
-        <progress class="progress is-primary" max="100">30%</progress>
+        <progress class="progress is-primary" *ngIf='!badRequest' max="100">30%</progress>
       </div>
       <div class="box" *ngIf='badRequest'>
         <h2>Unable to get weather for your current location. Please refresh and try again</h2>

@@ -10,6 +10,7 @@ import { CurrentTempModel } from 'src/app/models/currentTemp.model';
 export class CurrentTempComponent implements OnInit {
     constructor(public http: HttpClient) { }
 
+    //variables
     private httpOptions = {
         headers: new HttpHeaders()
     }
@@ -20,13 +21,6 @@ export class CurrentTempComponent implements OnInit {
     location: any
     url = "https://api.openweathermap.org/data/2.5/weather?units=imperial&lat="
     todayTempData = new CurrentTempModel()
-    // todayTempData = {
-    //     city: '',
-    //     current : '',
-    //     high : '',
-    //     low : '',
-    //     feelsLike : ''
-    // }
 
     ngOnInit(){
         navigator.geolocation.getCurrentPosition((position) => {
@@ -47,6 +41,7 @@ export class CurrentTempComponent implements OnInit {
 
         }
         catch (err) {
+            console.log(err)
             this.badRequest = true
             this.showTemps = false;
         }
